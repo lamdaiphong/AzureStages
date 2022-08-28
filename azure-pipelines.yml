@@ -26,8 +26,9 @@ stages:
 
 - stage: DeployDev
   displayName: Deploy to DEV environment
-  # add empty [] allows stages run in parallel instead of in sequence, now DeployDev stage will run same time with BuildApp
-  #dependsOn: []
+  # add dependsOn
+  dependsOn: 
+   - BuildApp
   jobs:
   - job: DeployFrontendDev
     displayName: Deploy frontend to DEV
@@ -43,6 +44,8 @@ stages:
 
 - stage: DeployProd
   displayName: Deploy to PROD environment
+  # add empty [] allows stages run in parallel instead of in sequence, now DeployDev stage will run same time with BuildApp
+  dependsOn: []
   pool:
     vmImage: 'macOS-10.15'
   jobs:
@@ -54,6 +57,7 @@ stages:
 
   - job: DeployBackendProd
     displayName: Deploy backend to PROD
+    dependsOn: []
     pool:
       vmImage: 'windows-2022'
     steps:
