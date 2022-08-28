@@ -26,6 +26,8 @@ stages:
 
 - stage: DeployDev
   displayName: Deploy to DEV environment
+  # add empty [] allows stages run in parallel instead of in sequence, now DeployDev stage will run same time with BuildApp
+  #dependsOn: []
   jobs:
   - job: DeployFrontendDev
     displayName: Deploy frontend to DEV
